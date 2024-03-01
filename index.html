@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magnon - Project Estimation System</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <form action="index.html" method="post" autocomplete="off" name="register-form" id="register-form">
+    <div id="myBillingclient">
+      <div class="title2">
+        <div class="logo">
+          <img src="./egplus-color-logo.png" alt="magnon-logo">
+        </div>
+        <div class="sub-title">
+          <h3>Project Estimation System</h3>
+        </div>
+      </div>
+      <hr>
+      <div class="invoice">
+        <!-- <form action=""> -->
+        <div class="form-container">
+          <div id="accountStep" class="step-container">
+            <!-- <label for="account">Select account:</label> -->
+            <select id="selectaccount" name="account" onchange="loadNextStep(this.value, 'brandStep')">
+              <option value="" selected="selected" disabled>Select Account*</option>
+              <option value="EG+ London">eg+ London</option>
+              <!-- Add more accounts as needed -->
+            </select>
+          </div>
+
+          <div id="brandStep" class="step-container">
+            <!-- <label for="brand">Select brand:</label> -->
+            <select id="brand" name="brand" onchange="loadNextStep(this.value, 'clientStep')" disabled>
+              <option value="" selected="selected" disabled>Select Brand*</option>
+              <!-- Options will be loaded dynamically based on the selected account -->
+            </select>
+          </div>
+
+          <div class="step-container">
+            <input id="cradeljob" class="manual-text" type="text" maxlength="10" placeholder="Cradle Job No">
+          </div>
+
+          <div class="step-container">
+            <input id="jiraTicket" class="manual-text" type="text" maxlength="10" placeholder="JIRA Ticket No">
+          </div>
+
+          <div id="clientStep" class="step-container">
+            <!-- <label for="client">Select client:</label> -->
+            <select id="client" name="client" onchange="loadNextStep(this.value, 'managerStep')" disabled>
+              <option value="" selected="selected" disabled>Client Manager*</option>
+              <!-- Options will be loaded dynamically based on the selected brand -->
+            </select>
+          </div>
+
+          <div id="" class="step-container">
+            <input id="clientID" class="manual-text" type="email" placeholder="Client's Email ID" disabled>
+            <!-- Options will be loaded dynamically based on the selected brand -->
+          </div>
+
+          <div id="otherClientDetails" class="step-container" style="display: none;">
+            <input id="otherClientName" class="manual-text" type="text" placeholder="Client Name">
+            <input id="OtrclientID" class="manual-text" type="email" placeholder="Client's Email ID">
+          </div>
+
+          <div id="managerStep" class="step-container">
+            <!-- <label for="manager">Select manager:</label> -->
+            <select id="manager" name="manager" disabled>
+              <option value="" selected="selected" disabled>Magnon eg+ AM/PM*</option>
+              <!-- Options will be loaded dynamically based on the selected client -->
+            </select>
+          </div>
+
+          <div id="" class="step-container">
+            <input id="accountManager" class="manual-text" type="email" placeholder="Meg+ AM/PM Email ID" disabled>
+          </div>
+
+          <div id="otherManagerDetails" class="step-container" style="display: none;">
+            <input id="otherManagerName" class="manual-text" type="text" placeholder="Manager Name">
+            <input id="OtraccountManager" class="manual-text" type="email" placeholder="Meg+ AM/PM Email ID">
+          </div>
+
+          <div id="" class="step-container">
+            <div class="date-container">
+              <input class="manual-text" name="date" id="date" placeholder="Project Start Date" readonly type="text" />
+              <i class="fa-solid fa-calendar-days"></i>
+            </div>
+          </div>
+
+          <div id="" class="step-container">
+            <div class="date-container">
+              <input class="manual-text" id="date2" placeholder="Project End Date" readonly type="text" />
+              <i class="fa-solid fa-calendar-days"></i>
+            </div>
+          </div>
+
+          <!-- ------------deliverable selection--------------- -->
+          <div id="popupcont">
+          <div class="bcontainer">
+            <div class="select-box step-container">
+              <select id="first-select" name="Deliverables" class="filter-select">
+                <option value="" class="rhth" selected="selected" disabled>Deliverables Types*</option>
+                <option disabled="disabled" class="selectors Banners optionheader">Banners</option>
+                <option class="Banners" value="AnimatedGIFBanners" id="">Animated GIF Banners </option>
+                <option class="Banners" value="DCOBanners" id="">DCO Banners</option>
+                <option class="Banners" value="FlashtalkingBanners" id="">Flashtalking Banners</option>
+                <option class="Banners" value="HTML5AnimatedBanners" id="selectionone">HTML5 Animated Banners</option>
+                <option class="Banners" value="StaticBanners" id="">Static Banners</option>
+                <!-- Emailers -->
+                <option disabled="disabled" class="selectors Emailers optionheader">Emailers</option>
+                <option class="Emailers" value="HTML5Emailers" id="selectiontwo">HTML5 Emailers</option>
+                <option class="Emailers" value="OFTEmailers" id="">OFT Emailers</option>
+                <option class="Emailers" value="MailchimpEmailers" id="">Mailchimp Emailers</option>
+                <option class="Emailers" value="SalesforceEmailers" id="">Salesforce Emailers</option>
+                <!-- Web page -->
+                <option disabled="disabled" class="selectors Webpage optionheader">Web page</option>
+                <option class="Webpage" value="Webpage" id="selectionfour">CMS CONTENT / WEB PAGES</option>
+              </select>
+            </div>
+
+            <div class="select-box step-container subcategory">
+              <select id="second-selected" name="specification" class="second-select" disabled>
+                <option value="" class="Banners Emailers Landingpage Webpage" selected="selected" disabled>
+                  Type/Specifications*</option>
+                <!-- HTML Animated Banners -->
+                <option disabled="disabled" class="selectors HTML5AnimatedBanners optionheader">Animated Banners
+                </option>
+                <option value="144.00" class="selectors HTML5AnimatedBanners">Master (Complex) </option>
+                <option value="108.00" class="selectors HTML5AnimatedBanners">Master (Standerd)</option>
+                <option value="72.00" class="selectors HTML5AnimatedBanners">Master (Simple)</option>
+                <option value="63.00" class="selectors HTML5AnimatedBanners">Resize</option>
+                <option value="45.00" class="selectors HTML5AnimatedBanners">Adaptation/Localisation</option>
+                <option value="13.50" class="selectors HTML5AnimatedBanners">Minor Amend</option>
+                <option value="27.00" class="selectors HTML5AnimatedBanners">Additional Rounds of Amends</option>
+
+                <!-- Static Banners -->
+                <option disabled="disabled" class="selectors StaticBanners optionheader">Static Static Banners</option>
+                <option value="27.00" class="selectors StaticBanners">Master</option>
+                <option value="18.00" class="selectors StaticBanners">Resize/Adaptation/Localisation</option>
+                <option value="8.00" class="selectors StaticBanners">Additional Rounds of Amends</option>
+                <!-- DCO Banners -->
+                <option disabled="disabled" class="selectors DCOBanners optionheader">DCO Banners</option>
+                <option value="684.00" class="selectors DCOBanners">Master (Complex)</option>
+                <option value="504.00" class="selectors DCOBanners">Master (Standerd)</option>
+                <option value="360.00" class="selectors DCOBanners">Master (Simple)</option>
+                <option value="270.00" class="selectors DCOBanners">Resize</option>
+                <option value="198.00" class="selectors DCOBanners">Adaptation/Localisation</option>
+                <option value="36.00" class="selectors DCOBanners">Minor Amend</option>
+                <option value="234.00" class="selectors DCOBanners">Feed Sheet Maintenance</option>
+                <option value="180.00" class="selectors DCOBanners">Dynamic Profile + Feed Setup</option>
+                <!-- GIF Banners -->
+                <option disabled="disabled" class="selectors AnimatedGIFBanners optionheader">Animated GIF Banners
+                </option>
+                <option value="63.00" class="selectors AnimatedGIFBanners">Master</option>
+                <option value="36.00" class="selectors AnimatedGIFBanners">Resize</option>
+                <option value="21.60" class="selectors AnimatedGIFBanners">Adaptation/Localisation</option>
+                <option value="8.00" class="selectors AnimatedGIFBanners">Additional Rounds of Amends</option>
+                <!-- HTML Animated Banners -->
+                <option disabled="disabled" class="selectors FlashtalkingBanners optionheader">Flashtalking Banners
+                </option>
+                <option value="144.00" class="selectors FlashtalkingBanners">Master (Complex) </option>
+                <option value="108.00" class="selectors FlashtalkingBanners">Master (Standerd)</option>
+                <option value="72.00" class="selectors FlashtalkingBanners">Master (Simple)</option>
+                <option value="63.00" class="selectors FlashtalkingBanners">Resize</option>
+                <option value="45.00" class="selectors FlashtalkingBanners">Adaptation/Localisation</option>
+                <option value="13.50" class="selectors FlashtalkingBanners">Minor Amend</option>
+                <option value="27.00" class="selectors FlashtalkingBanners">Additional Rounds of Amends</option>
+                <!-- HTML Emailers -->
+                <option disabled="disabled" class="selectors HTML5Emailers optionheader">HTML5 Emailers</option>
+                <option value="198.00" class="selectors HTML5Emailers">Master (Complex)</option>
+                <option value="117.00" class="selectors HTML5Emailers">Adaptation/Localisation (Complex)</option>
+                <option value="162.00" class="selectors HTML5Emailers">Master (Standard)</option>
+                <option value="99.00" class="selectors HTML5Emailers">Adaptation/Localisation (Standard)</option>
+                <option value="126.00" class="selectors HTML5Emailers">Master (Simple)</option>
+                <option value="63.00" class="selectors HTML5Emailers">Adaptation/Localisation (Simple)</option>
+                <option value="27.00" class="selectors HTML5Emailers">Minor Amend/Additional Amend </option>
+                <!-- OFT Emailers -->
+                <option disabled="disabled" class="selectors OFTEmailers optionheader">OFT Emailers</option>
+                <option value="198.00" class="selectors OFTEmailers">Master (Complex)</option>
+                <option value="117.00" class="selectors OFTEmailers">Adaptation/Localisation (Complex)</option>
+                <option value="162.00" class="selectors OFTEmailers">Master (Standard)</option>
+                <option value="99.00" class="selectors OFTEmailers">Adaptation/Localisation (Standard)</option>
+                <option value="126.00" class="selectors OFTEmailers">Master (Simple)</option>
+                <option value="63.00" class="selectors OFTEmailers">Adaptation/Localisation (Simple)</option>
+                <option value="27.00" class="selectors OFTEmailers">Minor Amend/Additional Amend</option>
+                <!-- MailChimp Emailers -->
+                <option disabled="disabled" class="selectors MailchimpEmailers optionheader">MailChimp Emailers</option>
+                <option value="198.00" class="selectors MailchimpEmailers">Master (Complex)</option>
+                <option value="117.00" class="selectors MailchimpEmailers">Adaptation/Localisation (Complex)</option>
+                <option value="162.00" class="selectors MailchimpEmailers">Master (Standard)</option>
+                <option value="99.00" class="selectors MailchimpEmailers">Adaptation/Localisation (Standard)
+                </option>
+                <option value="126.00" class="selectors MailchimpEmailers">Master (Simple)</option>
+                <option value="63.00" class="selectors MailchimpEmailers">Adaptation/Localisation (Simple)
+                </option>
+                <option value="27.00" class="selectors MailchimpEmailers">Minor Amend/Additional Amend
+                </option>
+                <!-- Salesforce Emailers -->
+                <option disabled="disabled" class="selectors SalesforceEmailers optionheader">Salesforce Emailers
+                </option>
+                <option value="198.00" class="selectors SalesforceEmailers">Master (Complex)</option>
+                <option value="117.00" class="selectors SalesforceEmailers">Adaptation/Localisation (Complex)
+                </option>
+                <option value="162.00" class="selectors SalesforceEmailers">Master (Standard)</option>
+                <option value="99.00" class="selectors SalesforceEmailers">Adaptation/Localisation (Standard)
+                  
+                </option>
+                <option value="126.00" class="selectors SalesforceEmailers">Master (Simple)</option>
+                <option value="63.00" class="selectors SalesforceEmailers">Adaptation/Localisation (Simple)
+                </option>
+                <option value="27.00" class="selectors SalesforceEmailers">Minor Amend/Additional Amend
+                </option>
+                <!-- Web Pages -->
+                <option disabled="disabled" class="selectors Webpage optionheader">Web Pages</option>
+                <option value="1296.00" class="selectors Webpage">Complex Page</option>
+                <option value="936.00" class="selectors Webpage">Standard Page</option>
+                <option value="648.00" class="selectors Webpage">Simple Page</option>
+              </select>
+            </div>
+
+            <div id="" class="step-container cost d-flex">
+              <div class="manual-text manual-mob">
+                <span class="unitCurrency">$ </span>
+                <input id="priceperunit" class="selectedValue manual-text-price" placeholder="Rate" type="text"
+                  readonly>
+                <span> Per Unit</span>
+              </div>
+              <div class="manual-text">
+                <span class="unitCurrency">Quantity </span>
+                <input id="quantityperunit" name="quantity" class="selectedQuantity manual-text-price"
+                  onkeydown="javascript: return event.keyCode == 69 ? false : true" type="number"
+                  oninput="checkNumberFieldLength(this); event.target.value = event.target.value.replace(/[^0-9]*/g,'');"
+                  disabled="">
+              </div>
+            </div>
+
+            <div id="" class="step-container">
+              <div class="manual-text hideoutput">
+                <span class="unitCurrency">$</span>
+                <input id="totalcost" class="output manual-text-price" placeholder="Cost" disabled="">
+              </div>
+              <!-- <button class="disclose" id="closeButton" disabled>Delete</button> -->
+            </div>
+
+          </div></div>
+          <div class="clone"></div>
+          <div class="contfooter">
+            <div class="grandcost d-flex">
+              <span id="TotalCost">Total Cost</span>
+              <p id="grandTotal">&#36; &nbsp;<a href="javascript:void(0);"></a><span class="unitCurrency"></span><input
+                  class="grandTotal" id="grandtotalcost" disabled=""></p>
+              <!-- <input id="" name="quantity" class="selectedQuantity manual-text-price error" placeholder="" type="number" aria-required="true"> -->
+            </div>
+            <button id="cloneButton" type="button" value="button" disabled>+ Add More</button>
+
+          </div>
+        </div>
+        <!-- ------------deliverable selection--------------- -->
+      </div>
+      <!-- </form> -->
+    </div>
+      <div class="form-button">
+        <a href="#" onclick="window.location.reload(true);"><button class="">Clear Fields </button></a>
+        <!-- <button class="" type="submit" onclick="submitForm()">Generate Estimate</button> -->
+        <!-- <button type="button" onclick="generatePDF()">Generate Estimate</button> -->
+        <button id="submitButton" type="button" onclick="openPopup()">Generate Estimate</button>
+      </div>
+  </form>
+
+  <!-- Popup box -->
+  <div id="popup-main">
+    <div id="popup">
+      <!-- Dynamic HTML content will be inserted here -->
+    </div>
+    <button class="popupbtn popupclose" type="button">X</button>
+  </div>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="./jquaryvalidation.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"
+    integrity="sha512-w3u9q/DeneCSwUDjhiMNibTRh/1i/gScBVp2imNVAMCt6cUHIw6xzhzcPFIaL3Q1EbI2l+nu17q2aLJJLo4ZYg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="./script.js"></script>
+  <script>
+    $(function () {
+      $('#date,#date2').datepicker({
+        dateFormat: 'dd-M-yy',
+        minDate: -60
+      });
+
+      $('.date-icon').on('click', function () {
+        $('#date,#date2').focus();
+      })
+      $(".qty").each(function () {
+        $(this).keyup(function () {
+          calculateSum();
+        });
+      });
+    });
+
+    // input value upto 4 digit
+    function checkNumberFieldLength(elem) {
+      if (elem.value.length > 4) {
+        elem.value = elem.value.slice(0, 4);
+      }
+    }
+
+  </script>
+</body>
+
+</html>
